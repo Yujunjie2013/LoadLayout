@@ -21,14 +21,13 @@ public class LoadManager {
 
     private final LoadLayout loadLayout;
 
-    private LoadManager(ViewParam viewParam, ErrorClickListener clickListener, boolean isCancel) {
+    private LoadManager(ViewParam viewParam, ErrorClickListener clickListener) {
         ViewGroup rootParentView = viewParam.rootParentView;
         Context context = viewParam.context;
         View rootView = viewParam.rootView;
         loadLayout = new LoadLayout(context);
         loadLayout.setContenView(new DefaultContentView(rootView, context));
         if (rootParentView != null) {
-            //这里只有是Activity的时候才不会为null
             rootParentView.addView(loadLayout, 0, rootView.getLayoutParams());
         }
         initBindView(loadLayout, clickListener);
@@ -37,7 +36,6 @@ public class LoadManager {
     private void initBindView(LoadLayout loadLayout, ErrorClickListener clickListener) {
         Class<? extends BaseLoadView> defaultView = LoadView.newInstance().getDefaultView();
         HashMap<Class<? extends BaseLoadView>, BaseLoadView> loadViewList = LoadView.newInstance().getLoadViewList();
-        //将初始化绑定的所有View添加到LoadLayout中
         if (loadViewList != null && loadViewList.size() != 0) {
             for (Class cls : loadViewList.keySet()) {
                 BaseLoadView loadView = loadViewList.get(cls);
@@ -76,7 +74,6 @@ public class LoadManager {
     public static class Builder {
         private ViewParam viewParam;
         private ErrorClickListener listener;
-        private boolean isCancel;
 
         public Builder setRootView(@NonNull Object obj) {
             viewParam = LoadUtil.getViewParams(obj);
@@ -88,14 +85,8 @@ public class LoadManager {
             return this;
         }
 
-        //是否可以取消加载
-        public Builder setCancelLoad(boolean isCancel) {
-            this.isCancel = isCancel;
-            return this;
-        }
-
         public LoadManager build() {
-            return new LoadManager(viewParam, listener, isCancel);
+            return new LoadManager(viewParam, listener);
         }
     }
 

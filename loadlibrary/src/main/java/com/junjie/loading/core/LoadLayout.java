@@ -14,11 +14,7 @@ import com.junjie.loading.util.LoadUtil;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * 跟布局、包含内容布局、绑定的错误和加载布局
- * Activity中 setContentView的布局添会加到此布局中来，并将此布局添加到android.R.id.content布局下
- * Fragment 则直接使用该布局，在onCraeteView中返回该布局
- */
+
 public class LoadLayout extends FrameLayout {
     private final int STATEVIEW_CUSTOM_INDEX = 1;
     private Map<Class<? extends BaseLoadView>, BaseLoadView> stateViews = new HashMap<>();
@@ -37,7 +33,6 @@ public class LoadLayout extends FrameLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    //设置内容布局
     public void setContenView(BaseLoadView baseLoadView) {
         addMap(baseLoadView);
         View rootView = baseLoadView.getRootView(null);
@@ -51,14 +46,12 @@ public class LoadLayout extends FrameLayout {
         addMap(loadView);
     }
 
-    //如果不存在就添加
     private void addMap(BaseLoadView loadView) {
         if (!stateViews.containsKey(loadView.getClass())) {
             stateViews.put(loadView.getClass(), loadView);
         }
     }
 
-    //根据不同的字节码展示不同的View
     public void showView(Class<? extends BaseLoadView> showView) {
         showView(showView, null);
     }
@@ -87,14 +80,11 @@ public class LoadLayout extends FrameLayout {
     private void showStateView(Class<? extends BaseLoadView> status, Object tag) {
         if (preStateView != null) {
             if (curStateView == status) {
-                //如果当前的和本次要设置的一样，则直接返回
                 return;
             }
             stateViews.get(preStateView).onDetach();
         }
         if (getChildCount() > 1) {
-            //如果子View的数量大于1，则将第二个View移除，
-            // 确保只有一个内容布局,接下来需要显示什么布局再添加，这样可以避免重复添加布局;;;可替换成将所有布局添加进来
             removeViewAt(STATEVIEW_CUSTOM_INDEX);
         }
 
@@ -111,7 +101,6 @@ public class LoadLayout extends FrameLayout {
         curStateView = status;
     }
 
-    //检查要显示的布局是否存在
     private void checkExist(Class<? extends BaseLoadView> showView) {
         if (!stateViews.containsKey(showView)) {
             throw new IllegalArgumentException(String.format("The BaseLoadView (%s) is nonexistent.please BindView", showView.getClass()

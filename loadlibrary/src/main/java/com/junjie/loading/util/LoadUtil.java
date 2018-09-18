@@ -18,7 +18,7 @@ public class LoadUtil {
             Activity activity = (Activity) object;
             context = activity;
             rootParentView = activity.findViewById(android.R.id.content);
-            //这个得到的就是setContentView中的跟布局
+            //So what you get is the following layout in setContentView
             rootView = rootParentView != null ? rootParentView.getChildAt(0) : null;
         } else if (object instanceof View) {
             rootView = (View) object;

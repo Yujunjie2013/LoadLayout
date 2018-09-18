@@ -8,7 +8,7 @@ import android.view.View;
 import com.junjie.loading.core.ErrorClickListener;
 
 public abstract class BaseLoadView {
-    //是否可以点击、默认可以点击
+    //Whether it can be clicked, the default can be clicked
     private boolean isClickEnable = true;
     private View rootView;
     private Context context;
@@ -36,7 +36,6 @@ public abstract class BaseLoadView {
 
     private View onCreateView(final ErrorClickListener clickListener) {
         int res = getLayoutId();
-        //内容布局DefaultContentView时的判断
         if (res == 0 && rootView != null) {
             return rootView;
         }
@@ -79,36 +78,32 @@ public abstract class BaseLoadView {
 
     public void hide() {
     }
-
-    /*------以下4个方法的执行顺序是一次执行1、2、3、4、其中getLayoutId和onCreateView方法只会在创建是执行一次，
-    onAttach和onDetach方法会执行多次，分别在每次显示和销毁的时候执行---------------------------*/
-
     /**
-     * 1、布局资源id
+     * 1Layout id
      *
-     * @return 布局id
+     * @return
      */
     @LayoutRes
     protected abstract int getLayoutId();
 
     /**
-     * 2、当跟布局创建，可以初始化控件，列入findViewById；setText;...
+     * 2findViewById；setText;...
      *
-     * @param context  上下文
-     * @param rootView 跟布局View
+     * @param context
+     * @param rootView
      */
     protected abstract void onViewCreate(Context context, View rootView);
 
     /**
-     * 3、当View开始显示的时候；列入：可以开始播放动画
+     * 3
      *
-     * @param context  上下文
-     * @param rootView 跟View
+     * @param context
+     * @param rootView
      */
     public abstract void onAttach(Context context, View rootView);
 
     /**
-     * 4、释放资源；列入：可以让动画停止
+     * 4
      */
     public abstract void onDetach();
 

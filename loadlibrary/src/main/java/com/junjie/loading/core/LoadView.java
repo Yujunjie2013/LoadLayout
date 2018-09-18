@@ -36,13 +36,13 @@ public class LoadView {
         map = new HashMap<>();
     }
 
-    //绑定所有状态的View
+    //bind all View
     public LoadView bindView(@NonNull BaseLoadView loadView) {
         map.put(loadView.getClass(), loadView);
         return this;
     }
 
-    //默认显示的View
+    //The default display View
     public LoadView bindDefaultView(@NonNull Class<? extends BaseLoadView> defaultClass) {
         this.defaultView = defaultClass;
         return this;

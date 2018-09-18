@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         manager = new LoadManager.Builder()
                 .setRootView(this)
-                .setCancelLoad(true)
                 .setOnClick(new ErrorClickListener() {
                     @Override
                     public void onClick(View view) {
