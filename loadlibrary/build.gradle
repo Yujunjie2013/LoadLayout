@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
+//apply plugin: 'com.novoda.bintray-release'
 android {
     compileSdkVersion 28
 
@@ -23,15 +23,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
 }
-publish {
-    userOrg = 'yujunjie'      // bintray注册的用户名
-    groupId = 'com.junjie.loading'
-    artifactId = 'LoadLayout'// bintray创建的package
-    publishVersion = '1.0'
-    desc = '无侵入式Android布局加载库'
-}
+//publish {
+//    repoName = 'maven'
+//    userOrg = 'yujunjie'      // bintray注册的用户名
+//    groupId = 'com.junjie.loading'
+//    artifactId = 'LoadLayout'// bintray创建的package
+//    publishVersion = '1.0'
+//    desc = '无侵入式Android布局加载库'
+//    website = 'https://github.com/Yujunjie2013/LoadLayout'
+//}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
