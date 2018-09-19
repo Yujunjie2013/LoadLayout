@@ -16,10 +16,5 @@ public class App extends Application {
                 .bindView(new DefaultErrorLoad())
                 .bindView(new DefaultLoading(false))
                 .bindDefaultView(DefaultLoading.class);
-//        new LoadView.Builder()
-//                .bindView(new DefaultErrorLoad())
-//                .bindView(new DefaultLoading(false))
-//                .bindDefaultView(DefaultLoading.class)
-//                .build();
     }
 }
